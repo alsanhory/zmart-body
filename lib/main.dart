@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -21,11 +20,12 @@ import 'package:grocery_delivery_boy/view/screens/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'di_container.dart' as di;
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   await di.init();
   await MyNotification.initialize(flutterLocalNotificationsPlugin);
   FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
@@ -35,9 +35,11 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (context) => di.sl<ThemeProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<SplashProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<LanguageProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<LocalizationProvider>()),
+      ChangeNotifierProvider(
+          create: (context) => di.sl<LocalizationProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<AuthProvider>()),
-      ChangeNotifierProvider(create: (context) => di.sl<LocalizationProvider>()),
+      ChangeNotifierProvider(
+          create: (context) => di.sl<LocalizationProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<ProfileProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<OrderProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<ChatProvider>()),
